@@ -1,0 +1,112 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "OpenXmlPowerTools/4.5.3.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/OpenXmlPowerTools.dll": {}
+        },
+        "runtime": {
+          "lib/net45/OpenXmlPowerTools.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "OpenXmlPowerTools/4.5.3.2": {
+      "sha512": "F0HxQxh5+ZL5lOhkddrIozQj2ml0Zzwp25P5teEDmT8iyj++ZpeXf7c6aYqvHH1A9uULyayKVUUYhLi7+55pFw==",
+      "type": "package",
+      "path": "openxmlpowertools/4.5.3.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/OpenXmlPowerTools.dll",
+        "openxmlpowertools.4.5.3.2.nupkg.sha512",
+        "openxmlpowertools.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "OpenXmlPowerTools >= 4.5.3.2"
+    ]
+  },
+  "packageFolders": {
+    "/home/sh/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/media/sh/Local disk/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/GeneticAlgorythm.csproj",
+      "projectName": "GeneticAlgorythm",
+      "projectPath": "/media/sh/Local disk/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/GeneticAlgorythm.csproj",
+      "packagesPath": "/home/sh/.nuget/packages/",
+      "outputPath": "/media/sh/Local disk/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/home/sh/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "dependencies": {
+          "OpenXmlPowerTools": {
+            "target": "Package",
+            "version": "[4.5.3.2, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.2, 3.1.2]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.300/RuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'OpenXmlPowerTools 4.5.3.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "OpenXmlPowerTools",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
+}
