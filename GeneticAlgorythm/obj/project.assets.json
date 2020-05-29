@@ -33,24 +33,26 @@
     ]
   },
   "packageFolders": {
-    "/home/sh/.nuget/packages/": {}
+    "C:\\Users\\Nero\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/media/sh/Local disk/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/GeneticAlgorythm.csproj",
+      "projectUniqueName": "D:\\DonSTU\\(4) Эвристические методы\\GeneticAlgorythm\\GeneticAlgorythm\\GeneticAlgorythm.csproj",
       "projectName": "GeneticAlgorythm",
-      "projectPath": "/media/sh/Local disk/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/GeneticAlgorythm.csproj",
-      "packagesPath": "/home/sh/.nuget/packages/",
-      "outputPath": "/media/sh/Local disk/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/obj/",
+      "projectPath": "D:\\DonSTU\\(4) Эвристические методы\\GeneticAlgorythm\\GeneticAlgorythm\\GeneticAlgorythm.csproj",
+      "packagesPath": "C:\\Users\\Nero\\.nuget\\packages\\",
+      "outputPath": "D:\\DonSTU\\(4) Эвристические методы\\GeneticAlgorythm\\GeneticAlgorythm\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/sh/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Nero\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -82,18 +84,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.1.2, 3.1.2]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.300/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
   },

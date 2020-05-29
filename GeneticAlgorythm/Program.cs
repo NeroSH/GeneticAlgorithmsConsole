@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
- 
+using System.Threading.Tasks;
+
 namespace GeneticAlgorythm
 {
     public class Gen
@@ -22,9 +23,10 @@ namespace GeneticAlgorythm
                 dna.Add(ran.Next(1, 256));
                 num_proc.Add(-1);
             }
-            weigth = (T.ToArray()
-                        .OrderBy(v => ran.Next()))
-                     .ToList();
+            //weigth = (T.ToArray()
+            //            .OrderBy(v => ran.Next()))
+            //         .ToList();
+            weigth = T;
             loading = 0;
         }
  
@@ -52,6 +54,8 @@ namespace GeneticAlgorythm
         public int Repeat { get => repeat; }
         public int CrossoverRate { get => crossoverRate; }
         public int MutationRate { get => mutationRate; }
+        public List<Gen> Individuals = new List<Gen>();
+
         /// <summary>
         /// <para>
         ///n – количество устройств,
@@ -63,7 +67,7 @@ namespace GeneticAlgorythm
         ///proc – количество повторов.
         ///</para>
         /// </summary>
-        public GA(int n = 3, int m = 7, int t1 = 30, int t2 = 45, int ps = 5, int cr = 80, int mr = 30, int proc = 10)
+        public GA(int n = 3, int m = 7, int t1 = 30, int t2 = 45, int ps = 5, int cr = 80, int mr = 30, int proc = 5)
         {
             this.n = n;
             this.m = m;
@@ -75,7 +79,17 @@ namespace GeneticAlgorythm
             this.mutationRate = mr;
             this.tasks = new List<int>();
         }
- 
+        
+        public void GenerateRandomTasks()
+        {
+            var ran = new Random();
+            tasks.Clear();
+            for (int i = 0; i < M; i++)
+            {
+                tasks.Add(ran.Next(t1, t2 + 1));
+            }
+        }
+
         //номер процесса, куда будет распределяться задание в зависимости от приспособленности
         public void DistributeProcessors(ref Gen individual)
         {
@@ -159,9 +173,6 @@ namespace GeneticAlgorythm
                 arr[i] = val % 2;
                 val /= 2;
             }
-            foreach (int t in arr)
-                Console.Write(t);
-            Console.WriteLine();
             if (arr[7 - inv] == 1)
             {
                 arr[7 - inv] = 0;
@@ -170,9 +181,6 @@ namespace GeneticAlgorythm
             {
                 arr[7 - inv] = 1;
             }
-            foreach (int t in arr)
-                Console.Write(t);
-            Console.WriteLine();
             int rez = 0;
             for (int i = 7; i >= 0; i--)
             {
@@ -190,29 +198,37 @@ namespace GeneticAlgorythm
             Random ran = new Random();
             int randomMutationRate = ran.Next(0, 100);
             Console.WriteLine("\nСлучайная вероятность мутации= " + randomMutationRate + "%" );
-            if (randomMutationRate < mutationRate)
+            if (randomMutationRate > mutationRate)
             {
                 Console.WriteLine("\nСлучайная вероятность мутации = " + randomMutationRate + "%"
-                    + " < минимальная вероятность мутации = " + mutationRate + "%");
+                    + " > минимальная вероятность мутации = " + mutationRate + "%");
                 Console.WriteLine("\nНет мутации");
                 Console.WriteLine();
             }
             else
             {
                 Console.WriteLine("\nСлучайная вероятность мутации = " + randomMutationRate + "%"
-                    + " > минимальная вероятность мутации = " + mutationRate + "%");
+                    + " < минимальная вероятность мутации = " + mutationRate + "%");
                 
                 Console.WriteLine("---\t---\t---\t---\t---\t---");
                 Console.WriteLine("\nПервый потомок");
                 int gen_mut_1 = ran.Next(this.m);
                 Console.WriteLine("\nВыбранный ген для мутации {0}", gen_mut_1 + 1);
                 int bit_mut_1 = ran.Next(8);
-                Console.WriteLine("\nВыбранный бит для мутации {0}", bit_mut_1 + 1);
-                Console.WriteLine("\nВыбранное ген для мутации {0}", desc_1.dna[gen_mut_1]);
-                int[] arr_1 = new int[8];
+                int bit_mut_2 = ran.Next(8);
+                while (bit_mut_1 == bit_mut_2 || Math.Abs(bit_mut_1 - bit_mut_2) == 1)
+                {
+                    bit_mut_1 = ran.Next(8);
+                    bit_mut_2 = ran.Next(8);
+                }
+                Console.WriteLine("\nВыбранный биты для мутации {0} и {1}", bit_mut_1 + 1, bit_mut_2 + 1);
+                Console.WriteLine("\nЗначение гена до мутации {0}", desc_1.dna[gen_mut_1]);
+                Console.WriteLine(Convert.ToString(desc_1.dna[gen_mut_1], 2).PadLeft(8, '0'));
                 int new_z_1 = ToBin(desc_1.dna[gen_mut_1], bit_mut_1);
-                Console.WriteLine("\nЗначение гена после мутации {0}", new_z_1);
+                new_z_1 = ToBin(new_z_1, bit_mut_2);
                 desc_1.dna[gen_mut_1] = new_z_1;
+                Console.WriteLine(Convert.ToString(desc_1.dna[gen_mut_1], 2).PadLeft(8, '0'));
+                Console.WriteLine("\nЗначение гена после мутации {0}", new_z_1);
                 DistributeProcessors(ref desc_1);
                 desc_1.loading = CountIndividualLoading(desc_1);
                 Console.WriteLine("\nПотомок после мутации");
@@ -221,14 +237,26 @@ namespace GeneticAlgorythm
                 Console.WriteLine("---\t---\t---\t---\t---\t---");
                 Console.WriteLine("\nВторой потомок");
                 int gen_mut_2 = ran.Next(this.m);
+                while (gen_mut_2 == gen_mut_1)
+                {
+                    gen_mut_2 = ran.Next(this.m);
+                }
                 Console.WriteLine("\nВыбранный ген для мутации {0}", gen_mut_2 + 1);
-                int bit_mut_2 = ran.Next(8);
-                Console.WriteLine("\nВыбранный бит для мутации {0}", bit_mut_2 + 1);
-                Console.WriteLine("\nВыбранное ген для мутации {0}", desc_2.dna[gen_mut_2]);
-                int[] arr_2 = new int[8];
-                int new_z_2 = ToBin(desc_2.dna[gen_mut_2], bit_mut_2);
-                Console.WriteLine("\nЗначение гена после мутации {0}", new_z_2);
+                bit_mut_1 = ran.Next(8);
+                bit_mut_2 = ran.Next(8);
+                while (bit_mut_1 == bit_mut_2 || Math.Abs(bit_mut_1 - bit_mut_2) == 1)
+                {
+                    bit_mut_1 = ran.Next(8);
+                    bit_mut_2 = ran.Next(8);
+                }
+                Console.WriteLine("\nВыбранный биты для мутации {0} и {1}", bit_mut_1 + 1, bit_mut_2 + 1);
+                Console.WriteLine("\nЗначение гена до мутации {0}", desc_2.dna[gen_mut_2]);
+                Console.WriteLine(Convert.ToString(desc_1.dna[gen_mut_1], 2).PadLeft(8, '0'));
+                int new_z_2 = ToBin(desc_2.dna[gen_mut_2], bit_mut_1);
+                new_z_2 = ToBin(new_z_2, bit_mut_2);
                 desc_2.dna[gen_mut_2] = new_z_2;
+                Console.WriteLine(Convert.ToString(desc_1.dna[gen_mut_1], 2).PadLeft(8, '0'));
+                Console.WriteLine("\nЗначение гена после мутации {0}", new_z_2);
                 DistributeProcessors(ref desc_2);
                 desc_2.loading = CountIndividualLoading(desc_2);
                 Console.WriteLine("\nПотомок после мутации");
@@ -238,13 +266,27 @@ namespace GeneticAlgorythm
             }
         }
  
+        public void IndividFromPopulation(Gen[] iterations)
+        {
+            foreach (Gen i in iterations)
+            {
+                Individuals.Add(i);
+            }
+        }
+
         //модификация оператора кросовера
         public void Crossover(Gen[] iterations, int j)
         {
             Random ran = new Random();
             int r_cross = ran.Next(0, 100);
             //Кроссовер
-            int point_cross = ran.Next(1, m);
+            int point_cross = ran.Next(1, m/2);
+            int point_cross_2 = ran.Next(m/2, m);
+            while (Math.Abs(point_cross_2 - point_cross) <= 1)
+            {
+                point_cross = ran.Next(1, m / 2);
+                point_cross_2 = ran.Next(m / 2, m);
+            }
             Console.WriteLine("______________________________________");
             Console.WriteLine("Случайная вероятность скрещивания = " + r_cross + "%");
             if (r_cross < crossoverRate)
@@ -254,7 +296,7 @@ namespace GeneticAlgorythm
                 //Выбор особей для кроссовера
                 int l = ran.Next(0, iterations.Length);
                 int k = ran.Next(0, iterations.Length);
-                while (l == j || k == j || l == k)
+                while (l == j || k == j || l == k || Math.Abs(l - k) <= 1)
                 {
                     l = ran.Next(0, iterations.Length);
                     k = ran.Next(0, iterations.Length);
@@ -276,45 +318,54 @@ namespace GeneticAlgorythm
                     Console.WriteLine("Родителями являются особи " + (j + 1) + " и " + (k + 1));
                     l = j;
                 }
-                Console.WriteLine("\nВыбранная точка кроссовера: {0}", point_cross);
+                Console.WriteLine("\nВыбранная точка кроссовера: {0} и {1}", point_cross, point_cross_2);
                 Console.WriteLine("\nРодитель 1 : Особь {0}", k + 1);
                 PrintGenInfo(iterations[k], point_cross, 2);
                 Console.WriteLine("\nРодитель 2 : Особь {0}", l + 1);
                 PrintGenInfo(iterations[l], point_cross, 1);
-                
- 
+
+
                 Gen desc_1 = new Gen(iterations[l]);
                 Gen desc_2 = new Gen(iterations[k]);
- 
-                for (int i = point_cross; i < m; i++)
+
+                //for (int i = point_cross; i < m; i++)
+                //{
+                //    int tmp = desc_1.dna[i];
+                //    desc_1.dna[i] = desc_2.dna[i];
+                //    desc_2.dna[i] = tmp;
+                //}
+
+                for (int i = point_cross; i < point_cross_2 - 1; i++)
                 {
                     int tmp = desc_1.dna[i];
                     desc_1.dna[i] = desc_2.dna[i];
                     desc_2.dna[i] = tmp;
                 }
- 
+
+
                 DistributeProcessors(ref desc_1);
                 desc_1.loading = CountIndividualLoading(desc_1);
                 DistributeProcessors(ref desc_2);
                 desc_2.loading = CountIndividualLoading(desc_2);
                 Console.WriteLine("\nПотомки кроссовера");
                 Console.WriteLine("\nПотомок 1");
-                PrintGenInfo(desc_1,m,1);
+                PrintGenInfo(desc_2, m, 2);
                 Console.WriteLine("\nПотомок 2");
-                PrintGenInfo(desc_2,m,2);
- 
+                PrintGenInfo(desc_1, m, 1);
+
                 Mutate(desc_1, desc_2);
                 ReducePopulation(iterations, desc_1, desc_2);
- 
+                Individuals.Add(desc_1);
+                Individuals.Add(desc_2);
             }
             else
             {
                 Console.WriteLine("Случайная вероятность скрещивания = " + r_cross + "%"
                     + " > минимальная вероятность скрещивания = " + crossoverRate + "%");
                 Console.WriteLine("\nОсобь переходит в новое поколение без изменений");
+                Console.WriteLine("Поколение без изменений");
             }
-            Console.WriteLine("Новая популяция");
-            PrintGenInfo(iterations);
+            
         }
  
         public bool Fit(Gen[] last, int repet_best)
@@ -351,8 +402,8 @@ namespace GeneticAlgorythm
             Console.WriteLine(); ;
             Console.ForegroundColor = ConsoleColor.Gray;
         }
- 
-        public void PrintGenInfo(Gen indiv, int border, int order)
+
+        public void PrintGenInfo(Gen indiv, int from, int order)
         {
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.ForegroundColor = ConsoleColor.White;
@@ -371,7 +422,7 @@ namespace GeneticAlgorythm
             foreach (int tt in indiv.dna)
             {
                 c++;
-                if (c == border)
+                if (c == from)
                     if (order == 1)
                     {
                         Console.BackgroundColor = ConsoleColor.Yellow;
@@ -403,7 +454,7 @@ namespace GeneticAlgorythm
             foreach (int tt in indiv.weigth)
             {
                 c++;
-                if (c == border)
+                if (c == from)
                     if (order == 1)
                     {
                         Console.BackgroundColor = ConsoleColor.Yellow;
@@ -435,7 +486,7 @@ namespace GeneticAlgorythm
             foreach (int tt in indiv.num_proc)
             {
                 c++;
-                if (c == border)
+                if (c == from)
                     if (order == 1)
                     {
                         Console.BackgroundColor = ConsoleColor.Yellow;
@@ -454,7 +505,111 @@ namespace GeneticAlgorythm
             Console.WriteLine("{0,15}: {1}", "Нагрузка", indiv.loading);
             Console.WriteLine();
         }
- 
+
+        // TODO
+        public void PrintGenInfo(Gen indiv, int from, int to, int order)
+        {
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("{0, 13}", "Ген:");
+            if (order == 1)
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else if (order == 2)
+            {
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+            }
+            int c = -1;
+            foreach (int tt in indiv.dna)
+            {
+                c++;
+                if (c == from)
+                    if (order == 1)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                    }
+                    else if (order == 2)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                Console.Write("{0,4}", tt);
+            }
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.WriteLine();
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("{0, 13}", "Вес:");
+            if (order == 1)
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else if (order == 2)
+            {
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+            }
+            c = -1;
+            foreach (int tt in indiv.weigth)
+            {
+                c++;
+                if (c == from)
+                    if (order == 1)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                    }
+                    else if (order == 2)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                Console.Write("{0,4}", tt);
+            }
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.WriteLine();
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("{0, 13}", "Процессор:");
+            if (order == 1)
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else if (order == 2)
+            {
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+            }
+            c = -1;
+            foreach (int tt in indiv.num_proc)
+            {
+                c++;
+                if (c == from)
+                    if (order == 1)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                    }
+                    else if (order == 2)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                Console.Write("{0,4}", tt + 1);
+            }
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("{0,15}: {1}", "Нагрузка", indiv.loading);
+            Console.WriteLine();
+        }
+
         public void PrintGenInfo(Gen indiv, ConsoleColor back, ConsoleColor front )
         {
             Console.ForegroundColor = front;
@@ -488,7 +643,23 @@ namespace GeneticAlgorythm
             Console.BackgroundColor = ConsoleColor.Black;
             Console.WriteLine();
         }
- 
+
+        public Gen[] GetBest()
+        {
+            PrintGenInfo(Individuals.ToArray());
+            Gen[] best_gens = new Gen[Population];
+            for (int i = 0; i < Population; i++)
+            {
+                best_gens[i] = Individuals[GetMinLoadedIndividual(Individuals.ToArray())];
+                Individuals.Remove(best_gens[i]);
+            }
+
+            Console.WriteLine("Лучшие {0} из всех получившихся индивидов", Population);
+            Console.WriteLine("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
+            PrintGenInfo(best_gens);
+            return best_gens;
+            
+        }
     }
  
     class Program
@@ -498,15 +669,8 @@ namespace GeneticAlgorythm
         static GA Default()
         {
             GA algo = new GA();
- 
-            algo.Tasks.Clear();
-            algo.Tasks.Add(30);
-            algo.Tasks.Add(42);
-            algo.Tasks.Add(43);
-            algo.Tasks.Add(34);
-            algo.Tasks.Add(32);
-            algo.Tasks.Add(30);
-            algo.Tasks.Add(30);
+
+            algo.GenerateRandomTasks();
  
             return algo;
         }
@@ -580,10 +744,16 @@ namespace GeneticAlgorythm
             // начальная популяция
             Gen[] iterations = new Gen[algo.Population];
             iterations[0] = new Gen(algo.Tasks);
+            Random ran = new Random();
             for (int i = 1; i < iterations.Length; i++)
             {
-                iterations[i] = new Gen(iterations[i - 1].weigth);
-                System.Threading.Thread.Sleep(150);
+                List<int> weight = new List<int>();
+                for (int w = 0; w < algo.M; w++)
+                {
+                    weight.Add(ran.Next(algo.T1, algo.T2+1));
+                }
+                iterations[i] = new Gen(weight);
+                System.Threading.Thread.Sleep(50);
             }
  
             //T max для каждой особи
@@ -597,38 +767,103 @@ namespace GeneticAlgorythm
  
             int num_pop = 1;
             int best = algo.Repeat;
+
+            //while (best != 0)
+            //{
+            //    int j = 0;
+            //    while (j != algo.Population)
+            //    {
+                    //int individ = algo.GetMinLoadedIndividual(iterations);
+                    //int currentBest = iterations[individ].loading;
+                    //algo.Crossover(iterations, j);
+                    //Console.WriteLine("номер популяции {0}", num_pop);
+                    //j++;
+                    //num_pop++;
+                    //if (algo.Fit(iterations, currentBest))
+                    //{
+                    //    best--;
+                    //}
+                    //else best = algo.Repeat;
+
+                    //if (best == 0)
+                    //{
+                    //    Console.WriteLine("\nРезультат достигнут");
+                    //    Console.WriteLine("\nРешением является:");
+                    //    algo.PrintGenInfo(iterations[individ], ConsoleColor.Green, ConsoleColor.Black);
+                    //    break;
+                    //}
+                    //else
+                    //{
+                    //    Console.Write("Лучшая особь в популяции ");
+                    //    Console.WriteLine("{0}", individ + 1);
+                    //}
+            //    }
+            //}
+
+            //int j = 0;
+            //int best_individ = 0;
+            //while (j != algo.Population)
+            //{
+            //    int individ = algo.GetMinLoadedIndividual(iterations);
+            //    int currentBest = iterations[individ].loading;
+            //    algo.Crossover(iterations, j);
+            //    Console.WriteLine("номер популяции {0}", num_pop);
+            //    j++;
+            //    best_individ = individ;
+
+
+            //    num_pop++;
+            //    if (algo.Fit(iterations, currentBest))
+            //    {
+            //        best--;
+            //    }
+            //    else best = algo.Repeat;
+
+            //}
+
+            num_pop = 0;
+            int individ = 0;
+            int current_best = 0;
+            best = 5;
             while (best != 0)
             {
-                int j = 0;
-                while (j != algo.Population)
+                Console.WriteLine("номер популяции {0}", num_pop);
+                individ = algo.GetMinLoadedIndividual(iterations);
+                current_best = iterations[individ].loading;
+                algo.IndividFromPopulation(iterations);
+                for (int i = 0; i < algo.Population; i++)
                 {
-                    int individ = algo.GetMinLoadedIndividual(iterations);
-                    int currentBest = iterations[individ].loading;
-                    algo.Crossover(iterations, j);
-                    Console.WriteLine("номер популяции {0}", num_pop);
-                    j++;
-                    num_pop++;
-                    if (algo.Fit(iterations, currentBest))
-                    {
-                        best--;
-                    }
-                    else best = algo.Repeat;
- 
-                    if (best == 0)
-                    {
-                        Console.WriteLine("\nРезультат достигнут");
-                        Console.WriteLine("\nРешением является:");
-                        algo.PrintGenInfo(iterations[individ], ConsoleColor.Green, ConsoleColor.Black);
-                        break;
-                    }
-                    else
-                    {
-                        Console.Write("Лучшая особь в популяции ");
-                        Console.WriteLine("{0}", individ + 1);
-                    }
+                    algo.Crossover(iterations, i);
                 }
+
+                iterations = algo.GetBest();
+                int ind = algo.GetMinLoadedIndividual(iterations);
+                int l = iterations[ind].loading;
+
+                num_pop++;
+                if (algo.Fit(iterations, current_best))
+                {
+                    best--;
+                }
+                else
+                {
+                    best = algo.Repeat;
+                }
+                Console.WriteLine("--------------------------------------------------------------");
+                Console.Write("Лучшая особь в популяции");
+                Console.WriteLine("  {0}   |", ind + 1);
+                Console.Write("Нагрузка особи в популяции");
+                Console.WriteLine("  {0}   |", l);
+                Console.WriteLine("--------------------------------------------------------------");
+
             }
- 
+            Console.WriteLine("\nРезультат достигнут");
+            Console.WriteLine("\nРешением является:");
+            algo.PrintGenInfo(iterations[individ], ConsoleColor.Green, ConsoleColor.Black);
+
+
+
+
             Console.Write("\nДля завершения работы нажмите на любую кпонку...");
             Console.ReadKey();
         }

@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "FC1Ru0E5fCOtafm1kSCK/LT8yBAbG8wtZbK2XgFHCmyyca9te+031H6HdNcBtvDo3U8DBXbjnIr+eZxL8ouIZw==",
+  "dgSpecHash": "hS4KORQvwOk3PFBczxUqpOyLRyCkQ7fmXKFCFnAeaGKohQB4kDN1VK8iUfrV43xLWZKH8Jas7itIbqqp3g4P3Q==",
   "success": true,
-  "projectFilePath": "/media/sh/Local disk/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/GeneticAlgorythm.csproj",
+  "projectFilePath": "D:\\DonSTU\\(4) Эвристические методы\\GeneticAlgorythm\\GeneticAlgorythm\\GeneticAlgorythm.csproj",
   "expectedPackageFiles": [
-    "/home/sh/.nuget/packages/openxmlpowertools/4.5.3.2/openxmlpowertools.4.5.3.2.nupkg.sha512",
-    "/home/sh/.nuget/packages/microsoft.aspnetcore.app.ref/3.1.2/microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+    "C:\\Users\\Nero\\.nuget\\packages\\openxmlpowertools\\4.5.3.2\\openxmlpowertools.4.5.3.2.nupkg.sha512"
   ],
   "logs": [
     {

@@ -1,18 +1,3 @@
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/bin/Debug/netcoreapp3.1/GeneticAlgorythm.exe
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/bin/Debug/netcoreapp3.1/GeneticAlgorythm.deps.json
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/bin/Debug/netcoreapp3.1/GeneticAlgorythm.runtimeconfig.json
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/bin/Debug/netcoreapp3.1/GeneticAlgorythm.runtimeconfig.dev.json
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/bin/Debug/netcoreapp3.1/GeneticAlgorythm.dll
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/bin/Debug/netcoreapp3.1/GeneticAlgorythm.pdb
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/obj/Debug/netcoreapp3.1/GeneticAlgorythm.csprojAssemblyReference.cache
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/obj/Debug/netcoreapp3.1/GeneticAlgorythm.AssemblyInfoInputs.cache
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/obj/Debug/netcoreapp3.1/GeneticAlgorythm.AssemblyInfo.cs
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/obj/Debug/netcoreapp3.1/GeneticAlgorythm.dll
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/obj/Debug/netcoreapp3.1/GeneticAlgorythm.pdb
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/obj/Debug/netcoreapp3.1/GeneticAlgorythm.genruntimeconfig.cache
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/bin/Debug/netcoreapp3.1/OpenXmlPowerTools.dll
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/obj/Debug/netcoreapp3.1/GeneticAlgorythm.csproj.CoreCompileInputs.cache
-D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/obj/Debug/netcoreapp3.1/GeneticAlgorythm.csproj.CopyComplete
 /media/sh/Local disk/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/bin/Debug/netcoreapp3.1/GeneticAlgorythm
 /media/sh/Local disk/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/bin/Debug/netcoreapp3.1/GeneticAlgorythm.deps.json
 /media/sh/Local disk/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/bin/Debug/netcoreapp3.1/GeneticAlgorythm.runtimeconfig.json
@@ -28,3 +13,18 @@ D:/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAl
 /media/sh/Local disk/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/obj/Debug/netcoreapp3.1/GeneticAlgorythm.dll
 /media/sh/Local disk/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/obj/Debug/netcoreapp3.1/GeneticAlgorythm.pdb
 /media/sh/Local disk/DonSTU/(4) Эвристические методы/GeneticAlgorythm/GeneticAlgorythm/obj/Debug/netcoreapp3.1/GeneticAlgorythm.genruntimeconfig.cache
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\bin\Debug\netcoreapp3.1\GeneticAlgorythm.exe
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\bin\Debug\netcoreapp3.1\GeneticAlgorythm.deps.json
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\bin\Debug\netcoreapp3.1\GeneticAlgorythm.runtimeconfig.json
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\bin\Debug\netcoreapp3.1\GeneticAlgorythm.runtimeconfig.dev.json
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\bin\Debug\netcoreapp3.1\GeneticAlgorythm.dll
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\bin\Debug\netcoreapp3.1\GeneticAlgorythm.pdb
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\bin\Debug\netcoreapp3.1\OpenXmlPowerTools.dll
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\obj\Debug\netcoreapp3.1\GeneticAlgorythm.csproj.CoreCompileInputs.cache
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\obj\Debug\netcoreapp3.1\GeneticAlgorythm.AssemblyInfoInputs.cache
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\obj\Debug\netcoreapp3.1\GeneticAlgorythm.AssemblyInfo.cs
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\obj\Debug\netcoreapp3.1\GeneticAlgorythm.csproj.CopyComplete
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\obj\Debug\netcoreapp3.1\GeneticAlgorythm.dll
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\obj\Debug\netcoreapp3.1\GeneticAlgorythm.pdb
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\obj\Debug\netcoreapp3.1\GeneticAlgorythm.genruntimeconfig.cache
+D:\DonSTU\(4) Эвристические методы\GeneticAlgorythm\GeneticAlgorythm\obj\Debug\netcoreapp3.1\GeneticAlgorythm.csprojAssemblyReference.cache

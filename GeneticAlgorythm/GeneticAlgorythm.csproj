@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Program.cs~RF2fb8db.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="OpenXmlPowerTools" Version="4.5.3.2" />
   </ItemGroup>
 
